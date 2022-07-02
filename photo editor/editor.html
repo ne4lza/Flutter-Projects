@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <!-- FONTS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;700&family=Jura:wght@300&family=Koulen&family=Open+Sans:ital,wght@1,300&family=Ubuntu+Mono:ital@1&display=swap" rel="stylesheet">
+<!--FONTS BİTİŞİ-->
+    <title>Twin Converter-Editor</title>
+  </head>
+  <body style="background-image: url('images/background.jpg'); background-attachment: fixed;">
+    <!-- navbar başlangıcı @ne4lza-->
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo.png" width="180" height="50" class="d-inline-block align-top" alt="">
+      </a>
+      | Twin Converter
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="index.html">Anasayfa <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="editor.html">Fotoğrafı Düzenle</a>
+      <a class="nav-item nav-link" href="contact.html">İletişim</a>
+    </div>
+  </div>
+</nav>
+<!--navbar bitişi-->
+<!--başlık başlangıcı-->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="header-text">FOTOĞRAFLARINIZI HIZLI BİR BİÇİMDE DÜZENLEYİN!</h1>
+  </div>
+</div>
+<!-- başlık bitişi-->
+
+<!-- content başlangıcı -->
+    <div class="widget-container">
+        <div class="photo-widget is-column-layout">
+            <div id="workspace" class="photo-widget_workspace">
+                <div id="uploadInstructions" class="photo-widget_upload-instructions">
+                    <p><span class="hasDrag">Fotoğrafı Sürükleyerek Düzenlemeye Başlayın</span>
+                        <span class="hasDrag">Ya Da</span>
+                        <label>
+                            <span class="hasDrag">Dosyalardan Seçin</span>
+                            <span class="doesNotHaveDrag">Select an image file to edit</span>
+                            <input id="fileInput" type="file" accept="image/*"/>
+                        </label>
+                    </p>
+                </div>
+                <div id="editor" class="photo-widget_editor"></div>
+                <div id="spinner" class="spinner-box is-hidden">
+                    <div class="spinner">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+            <div id="tools" class="photo-widget_tools">
+                <div class="photo-widget_toolbar">
+                    <div id="photoWidgetTabs" class="photo-widget_tabs">
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchScale" value="Scale" title="Scale Image" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-minus"></i>
+                                <span class="-label">Ölçek</span>
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchCrop" value="Crop" title="Crop Image" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-crop"></i>
+                                <span class="module-control-group_tool-switch-label">Kırpma</span>
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchHistory" value="History" title="Image History" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-history"></i>
+                                <span class="module-control-group_tool-switch-label">Geçmiş</span>
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchRotate" value="Rotate" title="Rotate Image" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-rotate-left"></i>
+                                <span class="module-control-group_tool-switch-label">Döndür</span>
+                            </button>
+                        </div>
+
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchClear" value="Clear" title="Start Over" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-ban"></i>
+                                <span class="module-control-group_tool-switch-label">Sıfırla</span>
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchZoom" value="Zoom" title="Zoom Image" disabled="disabled"
+                                    class="module-control-group_tool-switch">
+                                <i class="fa fa-search-plus"></i>
+                                <span class="module-control-group_tool-switch-label">Büyüt</span>
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                            <button id="toolSwitchSave" value="Save" title="Save Image" disabled="disabled"
+                                    class="module-control-group_tool-switch">Kaydet
+                            </button>
+                        </div>
+                        <div class="photo-widget_tab">
+                       <div class="input-group mb-3">
+                          <select class="custom-select" id="mySelect">
+                            <option value=".jpeg">jpeg</option>
+                            <option value=".png">png</option>
+                            <option value=".gif">gif</option>
+                            <option value=".tiff">tiff</option>
+                          </select>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="photo-widget_tab-panels">
+                        <div id="controlSetScale" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-scale">
+                                        <div class="module-slider-control">
+                                            <em>1%</em>
+                                            <input id="scaleImageControl" type="range" min="1" max="100" value="100"/>
+                                            <em>100%</em>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                        <span class="module-control-group_control-value">
+                                            <span id="scaleValue">100</span>
+                                            <span>%</span>
+                                        </span>
+
+                                        <span class="module-control-group_resets">
+                                            <button id="resetScale" title="Reset Scale" class="btn btn-outline-dark" disabled="disabled">
+                                                <i class="fa fa-ban"></i>
+                                            </button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetCrop" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-crop">
+                                        <div class="module-crop-control">
+                                            <button class="module-control-group_start-button btn btn-outline-dark" id="cropImageControl">
+                                                <span>Kırp</span>
+                                            </button>
+
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                            <span class="module-control-group_group-name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetHistory" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-undo-redo">
+                                        <div class="module-undo-redo-control">
+                                            <button id="undoControl" title="Undo" class="btn btn-outline-dark" disabled="disabled">
+                                                <i class="fa fa-mail-reply"></i>
+                                            </button>
+                                            <button id="redoControl" title="Redo" class="btn btn-outline-dark" disabled="disabled">
+                                                <i class="fa fa-mail-forward"></i>
+                                            </button>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                            <span class="module-control-group_group-name">
+                                                <label for="undoControl">
+                                                    <span></span>
+                                                </label>
+                                                <label for="redoControl">
+                                                    <span></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetRotate" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-rotate">
+
+                                        <div class="module-rotate-control">
+                                            <button id="rotateLeft" title="Rotate Left" class="btn btn-outline-dark" value="-90">
+                                                <i class="fa fa-undo"></i>
+                                            </button>
+                                             <span class="module-photo-widget_rotation-value">
+                                               <span id="rotationValue" class="photo-widget_control-value">0</span>
+                                             <sup class="photo-widget_control-value">&deg;</sup>
+                                        </span>
+                                            <button id="rotateRight" title="Rotate Right"class="btn btn-outline-dark" value="90">
+                                                <i class="fa fa-rotate-right"></i>
+                                            </button>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetSave" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-save">
+                                        <div class="module-save-control">
+                                            <a class="button btn btn-outline-dark" id="save" href="#" download style="height: 35px;">  <i class="fa fa-save"></i></a>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                            <span class="module-control-group_group-name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetClear" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-reset">
+
+                                        <div class="module-reset-control">
+                                            <button id="clearImageControl" class="btn btn-outline-dark"><i class="fa fa-ban"></i></button>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                            <span class="module-control-group_group-name"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="controlSetZoom" class="photo-widget_control-group module-control-group">
+                            <div class="module-control-group_container">
+                                <div class="module-control-group_tool-group-container">
+                                    <div class="module-control-group_tool-group-zoom">
+                                        <div class="module-zoom-control">
+                                            <em>1%</em>
+                                            <input id="zoomControl" type="range" min="1" max="500" value="100"/>
+                                            <em>500%</em>
+                                            <button id="zoom50Button" class="btn btn-outline-dark" value="50" title="Zoom 50%" disabled="disabled">50%
+                                            </button>
+                                            <button id="zoom200Button" class="btn btn-outline-dark" value="200" title="Zoom 200%" disabled="disabled">
+                                                200%
+                                            </button>
+                                            <button id="zoom500Button" class="btn btn-outline-dark" value="500" title="Zoom 500%" disabled="disabled">
+                                                500%
+                                            </button>
+                                        </div>
+                                        <div class="module-control-group_lower-control-container">
+                                        <span class="module-control-group_control-value">
+                                            <span id="zoomValue">100</span>
+                                            <span>%</span>
+                                        </span>
+                                            <span class="module-control-group_group-name"></span>
+                                        <span class="module-control-group_resets">
+                                           <button id="zoom100Button" value="100" title="Zoom 100%" disabled="disabled">
+                                                <i class="fa fa-ban"></i></button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--content bitişi-->
+<!--footer başlangıcı -->
+
+<footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>Hakkımızda</h6>
+            <p class="text-justify">Twin Converter olarak ücretsiz bir şekilde fotoğraf düzenleme aracı hizmeti vermekteyiz. Bize destek olmak için sosyal medyadan takip edebilirsiniz.</p>
+          </div>
+          <div class="col-xs-6 col-md-3 ml-5">
+            <h6>Hızlı Bağlantılar</h6>
+            <ul class="footer-links">
+              <li><a href="contact.html">İletişim</a></li>
+              <li><a href="editor.html">Fotoğraf Editörü</a></li>
+              <li><a href="index.html">Anasayfa</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2022 All Rights Reserved by @ne4lza
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+<!--footer bitişi-->
+<script src="js/jss.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
